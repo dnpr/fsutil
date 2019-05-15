@@ -1,6 +1,6 @@
 {
   "name": "fsutil",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "File system utils.",
   "main": "lib/index.js",
   "directories": {
