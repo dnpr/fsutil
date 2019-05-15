@@ -12,7 +12,7 @@ function isEmptyArray(arr) {
 
 describe('fsutil.getDirectories', () => {
   it('should return directories inside input path', function (done) {
-    let dirs = fsUtil.getDirectories(path.join(__dirname, '..'));
+    let dirs = fsUtil.getDirectories(path.join(__dirname, '../node_modules/mocha'));
     for (let i = 0; i < dirs.length; i += 1) {
       const isDir = fs.lstatSync(dirs[i]).isDirectory();
       assert.strictEqual(isDir, true, 'Expected path to be a folder');
@@ -38,7 +38,7 @@ describe('fsutil.getDirectories', () => {
 
 describe('fsutil.getFiles', () => {
   it('should return files inside input path', function (done) {
-    let dirs = fsUtil.getFiles(path.join(__dirname, '..'));
+    let dirs = fsUtil.getFiles(path.join(__dirname, '../node_modules/mocha'));
     for (let i = 0; i < dirs.length; i += 1) {
       const isFile = fs.lstatSync(dirs[i]).isFile();
       assert.strictEqual(isFile, true, 'Expected path to be a file');
@@ -71,7 +71,7 @@ describe('fsutil.getFileStat', () => {
     return new Promise((resolve, reject) => {
       for (let i = 0; i < keys.length; ++i) {
         let key = keys[i];
-        if (!stats.hasOwnProperty(key)) reject(new Error(`Property ${key} is not defined.`));
+        if (!stats.hasOwnProperty(key)) reject(new Error(`Property ${key} is not defined returned object.`));
       }
       resolve();
     });
