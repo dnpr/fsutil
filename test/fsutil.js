@@ -1,6 +1,7 @@
 'use strict';
 
 const assert = require('assert');
+const shell = require('child_process');
 const fs = require('fs');
 const path = require('path');
 const {
@@ -8,7 +9,8 @@ const {
   isFile,
   getDirectories,
   getFiles,
-  getFileStat
+  getFileStat,
+  copyDirSync
 } = require('../lib/fsutil');
 
 function isEmptyArray(arr) {
@@ -83,3 +85,12 @@ describe('getFileStat', () => {
     });
   })
 });
+
+describe('copyDirSync', () => {
+  it('should copy ./ to /tmp/test', (done) => {
+    copyDirSync(__dirname, '/tmp/test')
+    assert(fs.existsSync('/tmp/test'))
+    shell.exec('rm -rf /tmp/test', () => {})
+    done()
+  })
+})
