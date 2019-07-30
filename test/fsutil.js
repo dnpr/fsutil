@@ -3,16 +3,22 @@
 const assert = require('assert');
 const fs = require('fs');
 const path = require('path');
-const fsUtil = require('../lib');
+const {
+  isDirectory,
+  isFile,
+  getDirectories,
+  getFiles,
+  getFileStat
+} = require('../lib/fsutil');
 
 function isEmptyArray(arr) {
   assert.strictEqual(typeof arr, 'object', 'Expected type to be object');
   assert.strictEqual(arr.length, 0, 'Expected length to be 0');
 }
 
-describe('fsutil.getDirectories', () => {
+describe('getDirectories', () => {
   it('should return directories inside input path', function (done) {
-    let dirs = fsUtil.getDirectories(path.join(__dirname, '../node_modules/mocha'));
+    let dirs = getDirectories(path.join(__dirname, '../node_modules/mocha'));
     for (let i = 0; i < dirs.length; i += 1) {
       const isDir = fs.lstatSync(dirs[i]).isDirectory();
       assert.strictEqual(isDir, true, 'Expected path to be a folder');
@@ -20,25 +26,25 @@ describe('fsutil.getDirectories', () => {
     done();
   })
   it(`should return an empty array when input is empty`, function (done) {
-    let dirs = fsUtil.getDirectories();
+    let dirs = getDirectories();
     isEmptyArray(dirs);
     done();
   })
   it(`should return an empty array when input path does not exist`, function (done) {
-    let dirs = fsUtil.getDirectories('./nonexist');
+    let dirs = getDirectories('./nonexist');
     isEmptyArray(dirs);
     done();
   })
   it(`should return an empty array when input path is a file`, function (done) {
-    let dirs = fsUtil.getDirectories(path.join(__dirname, '../package.json'));
+    let dirs = getDirectories(path.join(__dirname, '../package.json'));
     isEmptyArray(dirs);
     done();
   })
 });
 
-describe('fsutil.getFiles', () => {
+describe('getFiles', () => {
   it('should return files inside input path', function (done) {
-    let dirs = fsUtil.getFiles(path.join(__dirname, '../node_modules/mocha'));
+    let dirs = getFiles(path.join(__dirname, '../node_modules/mocha'));
     for (let i = 0; i < dirs.length; i += 1) {
       const isFile = fs.lstatSync(dirs[i]).isFile();
       assert.strictEqual(isFile, true, 'Expected path to be a file');
@@ -46,26 +52,26 @@ describe('fsutil.getFiles', () => {
     done();
   })
   it(`should return an empty array when input is empty`, function (done) {
-    let files = fsUtil.getFiles();
+    let files = getFiles();
     isEmptyArray(files);
     done();
   })
   it(`should return an empty array when input path does not exist`, function (done) {
-    let files = fsUtil.getFiles('./nonexist');
+    let files = getFiles('./nonexist');
     isEmptyArray(files);
     done();
   })
   it(`should return an empty array when input path is a file`, function (done) {
-    let files = fsUtil.getFiles(path.join(__dirname, '../package.json'));
+    let files = getFiles(path.join(__dirname, '../package.json'));
     isEmptyArray(files);
     done();
   })
 });
 
-describe('fsutil.getFileStat', () => {
+describe('getFileStat', () => {
   it('should return status of input path', async function () {
     let file = path.join(__dirname, '../package.json');
-    let stats = await fsUtil.getFileStat(file);
+    let stats = await getFileStat(file);
     let answer = fs.statSync(file);
     let keys = Object.keys(answer);
     return new Promise((resolve, reject) => {
