@@ -71,7 +71,7 @@ describe('fsutil.getFileStat', () => {
     return new Promise((resolve, reject) => {
       for (let i = 0; i < keys.length; ++i) {
         let key = keys[i];
-        if (!stats.hasOwnProperty(key)) reject(new Error(`Property ${key} is not defined returned object.`));
+        if (!stats.hasOwnProperty(key)) reject(new Error(`Property ${key} is not defined in returned object.`));
       }
       resolve();
     });
