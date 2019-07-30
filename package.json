@@ -1,6 +1,6 @@
 {
   "name": "@dnpr/fsutil",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "File system utils.",
   "main": "lib/fsutil.js",
   "directories": {
