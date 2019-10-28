@@ -4,6 +4,9 @@ node_modules/
 # pnpm lockfile
 pnpm-lock.yaml
 
+# Logs
+*.log
+
 # macOS
 .DS_Store
 .AppleDouble
