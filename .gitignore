@@ -1,6 +1,9 @@
 # Node.js
 node_modules/
 
+# pnpm lockfile
+pnpm-lock.yaml
+
 # macOS
 .DS_Store
 .AppleDouble
